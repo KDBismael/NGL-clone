@@ -15,54 +15,70 @@ struct MessageTypeView: View {
     @State private var isConfirming = false
     @State private var isPhotoPickerPresented = false
     @State private var photoPickerItem: PhotosPickerItem?
-    @State private var message="Send me anonymous messages"
+    @State private var message="Send me anonymous messages!"
     
     var body: some View{
-        ZStack {
-            Rectangle()
-                .frame(width: 350, height: 250)
-                .clipShape(RoundedRectangle(cornerRadius: 50))
+        
+        VStack(spacing:15){
+            Button {
+                print("Upload Photo")
+                isConfirming = true
+            } label: {
+                Image("user1")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 75, height: 75)
+                    .clipShape(Circle())
+            }
+            .confirmationDialog("hey", isPresented: $isConfirming) {
+                Button("Upload Photo") {
+                    isPhotoPickerPresented = true
+                }
+                
+                Button("Cancel", role: .cancel) {
+                    isConfirming = false
+                }
+            } message: {
+                Text("Edit Profile Picture")
+            }
+            .photosPicker(isPresented: $isPhotoPickerPresented, selection: $photoPickerItem, matching: .images)
             
-            VStack{
-                Button {
-                    print("Upload Photo")
-                    isConfirming = true
-                } label: {
-                    Image("user1")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 75, height: 75)
-                        .clipShape(Circle())
-                }
-                .confirmationDialog("hey", isPresented: $isConfirming) {
-                    Button("Upload Photo") {
-                        isPhotoPickerPresented = true
-                    }
-                    
-                    Button("Cancel", role: .cancel) {
-                        isConfirming = false
-                    }
-                } message: {
-                    Text("Edit Profile Picture")
-                }
-                .photosPicker(isPresented: $isPhotoPickerPresented, selection: $photoPickerItem, matching: .images)
-                   
-                TextField(text: $message) {
-                    
-                }
+            Text("\(message)")
                 .font(.title)
                 .fontWeight(.bold)
+                .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
-            }
             
-//            Button ("Heyy") {
-//                print("Hey")
-//            }
-//            .background()
+            HStack{
+                Spacer()
+                Button {
+                } label: {
+                    Image(systemName: "arrow.counterclockwise")
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+
+                Button {
+                    
+                } label: {
+                    Image(systemName: "circle.square")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    
+                }.frame(width: 70,height: 70)
+                .background(.gray.opacity(0.3))
+                .clipShape(Circle())
+
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal)
+            
         }
-        
-        
-    }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 30.0)
+        .background(.black)
+        .clipShape(RoundedRectangle(cornerRadius: 50))
+        }
 }
 
 #Preview {
