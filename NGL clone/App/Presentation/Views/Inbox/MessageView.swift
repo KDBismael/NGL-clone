@@ -110,8 +110,8 @@ struct MessageView: View {
                     )
                     .frame(width: 40, height: 40)
                     .onTapGesture {
-                        var color1=colors1[Int.random(in: 0..<colors1.count)]
-                        var color2=colors2[Int.random(in: 0..<colors1.count)]
+                        let color1=colors1[Int.random(in: 0..<colors1.count)]
+                        let color2=colors2[Int.random(in: 0..<colors1.count)]
                         
                         gradientColor = LinearGradient(colors:[Color(hex: color1),Color(hex: color2)], startPoint:.leading, endPoint: .trailing)
                     }

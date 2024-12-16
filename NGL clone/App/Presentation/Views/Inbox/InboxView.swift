@@ -43,7 +43,7 @@ struct InboxView: View {
 //                        } label: {
 //                        }
                         NavigationLink(value: index ) {
-                            ReceivedMessageButtonView()
+                            ArrowButtonView(title: .constant("Depuis t'es allé au Ghana tu te pppppppppp"), image: .constant("envelope.fill"), date: .constant("last month"),textColor:.constant(.black), imageColor:.constant(.pink), backgroundColor:.constant(.color(.gray.opacity(0.3))))
                         }
                         
                     }
@@ -59,39 +59,4 @@ struct InboxView: View {
 
 #Preview {
     InboxView()
-}
-
-struct ReceivedMessageButtonView: View {
-    var body: some View {
-        VStack(spacing:15) {
-            HStack(spacing:10){
-                Image(systemName: "envelope.fill")
-                    .foregroundStyle(.pink)
-                    .font(.title)
-                    .padding()
-                    .background(.gray.opacity(0.3))
-                    .clipShape(Circle())
-                
-                
-                VStack(alignment:.leading){
-                    Text("Depuis t'es allé au Ghana tu te pppppppppp")
-                        .font(.title2)
-                        .foregroundStyle(.black)
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                    
-                    Text("last month")
-                        .foregroundStyle(.gray)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                }
-                Image(systemName: "chevron.forward")
-                    .foregroundStyle(.gray)
-                    .font(.title2)
-            }
-            
-            Divider()
-        }
-        .padding(.horizontal,10)
-    }
 }
