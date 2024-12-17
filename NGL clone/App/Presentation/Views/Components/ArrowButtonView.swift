@@ -51,6 +51,7 @@ struct ArrowButtonView: View {
                     .font(.title2)
                     .fontWeight(.bold)
             }
+            .contentShape(Rectangle())
             
             Divider()
         }
