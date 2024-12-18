@@ -58,6 +58,11 @@ struct RecentView: View {
         }
         .sheet(isPresented: $showBottomSheet) {
             RecentViewBottomSheet()
+                .presentationDetents([
+                    .height(500)
+                ])
+                .presentationCornerRadius(30)
+
         }
     }
 }
