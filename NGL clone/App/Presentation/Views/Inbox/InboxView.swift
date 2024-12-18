@@ -50,8 +50,8 @@ struct InboxView: View {
                 }
             }
             .navigationDestination(for: Int.self) { index in
-                Text("Screen with index \(index)")
-//                    .toolbarVisibility(.hidden, for: .navigationBar)
+                MessageView()
+                    .toolbarVisibility(.hidden, for: .navigationBar)
             }
         }
     }

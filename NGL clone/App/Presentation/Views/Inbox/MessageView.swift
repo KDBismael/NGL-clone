@@ -17,6 +17,7 @@ struct MessageView: View {
     
     @State private var gradientColor:LinearGradient = LinearGradient(colors:[Color(hex: "#ec197d"),Color(hex: "#fc8118")], startPoint:.leading, endPoint: .trailing)
     @State private var isHighlighted = shareOn.instagram
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ScrollView {
@@ -66,6 +67,9 @@ struct MessageView: View {
                 Spacer()
                 Image(systemName: "xmark")
                     .fontWeight(.bold)
+                    .onTapGesture {
+                        dismiss()
+                    }
             }
             .font(.title)
             .foregroundStyle(.gray)
