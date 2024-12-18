@@ -9,59 +9,103 @@ import SwiftUI
 
 struct NavigationView: View {
     @State private var showSetting = false
+    @State private var selectedIndex: Int = 0
+    @State private var showShareDialog = false
+    @State private var showCopiedDialog = false
     
     var body: some View {
-        NavigationStack{
-            HStack{
-                NavigationLink {
-                    RecentView()
-                        .toolbarVisibility(.hidden, for: .navigationBar)
-                } label: {
-                    Image(systemName: "eye")
-                        .foregroundStyle(.gray)
-                }
-                .padding()
-                .background(.gray.opacity(0.1))
-                .clipShape(Circle())
-                
-                Button {
-                    print("see recent")
-                } label: {
-                }
-
-                
-                Spacer()
-                
-                Rectangle().frame(width: 150, height: 50)
-                
-                Spacer()
-                
-                Button {
-                    showSetting = true
-                } label: {
-                    Image(systemName: "gearshape")
-                    .foregroundStyle(.gray)
-                }
-                .padding()
-                .background(.gray.opacity(0.1))
-                .clipShape(Circle())
-                .confirmationDialog("settingsKey", isPresented: $showSetting) {
+        NavigationStack {
+            ZStack{
+                VStack(spacing:0){
+                    HStack{
+                        NavigationLink {
+                            RecentView()
+                                .toolbarVisibility(.hidden, for: .navigationBar)
+                        } label: {
+                            Image(systemName: "eye")
+                                .foregroundStyle(.gray)
+                        }
+                        .padding()
+                        .background(.gray.opacity(0.1))
+                        .clipShape(Circle())
+                        
+                        Button {
+                            print("see recent")
+                        } label: {
+                        }
+                        
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Text("PLAY")
+                                .foregroundStyle(selectedIndex == 0 ? .black : .gray)
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectedIndex = 0
+                                    }
+                                }
+                            Text("INBOX")
+                                .foregroundStyle(selectedIndex == 1 ? .black : .gray.opacity(0.7))
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectedIndex = 1
+                                    }
+                                }
+                        }
+                        .font(.title)
+                        .fontWeight(.black)
+                        
+                        Spacer()
+                        
+                        Button {
+                            showSetting = true
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .foregroundStyle(.gray)
+                        }
+                        .padding()
+                        .background(.gray.opacity(0.1))
+                        .clipShape(Circle())
+                        .confirmationDialog("settingsKey", isPresented: $showSetting) {
+                            
+                            Button("How to share the link") {
+                                showSetting = false
+                            }
+                            Button("Follow us on Snapchat") {
+                                showSetting = false
+                            }
+                            Button("Settings") {
+                                showSetting = false
+                            }
+                            Button("Cancel", role: .cancel) {
+                                showSetting = false
+                            }
+                        }
+                        
+                    }
                     
-                    Button("How to share the link") {
-                        showSetting = false
-                    }
-                    Button("Follow us on Snapchat") {
-                        showSetting = false
-                    }
-                    Button("Settings") {
-                        showSetting = false
-                    }
-                    Button("Cancel", role: .cancel) {
-                        showSetting = false
+                    VStack {
+                        TabView(selection: $selectedIndex) {
+                            PlayView(showShareDialog: $showShareDialog, showCopiedDialog: $showCopiedDialog)
+                                .tag(0)
+                            InboxView()
+                                .tag(1)
+                        }
+                        .ignoresSafeArea()
+                        .tabViewStyle(.page(indexDisplayMode: .never))
                     }
                 }
                 
-            }.padding()
+                if(showCopiedDialog){
+                    LinkCopiedView()
+                }
+                
+                if (showShareDialog){
+                    shareDialogView(showDialog: $showShareDialog)
+                }
+            }
+            
         }
     }
 }

@@ -11,12 +11,11 @@ struct PlayView: View {
     
     var gradientColor:LinearGradient = LinearGradient(colors:[Color(hex: "#ec197d"),Color(hex: "#fc8118")], startPoint:.leading, endPoint: .trailing)
     @State var scrollPosition: Int?
-    @State private var showShareDialog = false
-    @State private var showCopiedDialog = false
+    @Binding  var showShareDialog:Bool
+    @Binding  var showCopiedDialog:Bool
     
     var body: some View {
         ZStack {
-            ScrollView {
                 VStack(spacing:30){
                     RoundedRectangle(cornerRadius: 50)
                         .frame(height:300)
@@ -92,23 +91,21 @@ struct PlayView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 45))
                 }
                 .padding()
-                
-            }
             
-            if(showCopiedDialog){
-                LinkCopiedView()
-            }
-            
-            if (showShareDialog){
-                shareDialogView(showDialog: $showShareDialog)
-            }
+//            if(showCopiedDialog){
+//                LinkCopiedView()
+//            }
+//            
+//            if (showShareDialog){
+//                shareDialogView(showDialog: $showShareDialog)
+//            }
         }
         
     }
 }
 
 #Preview {
-    PlayView()
+    PlayView(showShareDialog: .constant(false), showCopiedDialog: .constant(false))
 }
 
 extension Color {
