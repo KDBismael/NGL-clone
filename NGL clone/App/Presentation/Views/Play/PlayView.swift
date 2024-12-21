@@ -17,10 +17,29 @@ struct PlayView: View {
     var body: some View {
         ZStack {
                 VStack(spacing:30){
-                    RoundedRectangle(cornerRadius: 50)
-                        .frame(height:300)
-                        .padding(.horizontal,20)
-                    
+                    GeometryReader { proxy in
+                        let size = proxy.size
+                        
+                        ScrollView(.horizontal) {
+                            HStack (spacing:0){
+                                ForEach(1..<5) { index in
+                                    MessageTypeView()
+                                        .frame(width: size.width * 0.87)
+                                        .padding(.horizontal,10)
+                                        .scrollTransition(.interactive) { content, phase in
+                                            content
+                                                .offset(x: 16)
+                                        }
+//                                        .padding(.horizontal,20)
+                                }
+                            }
+                            .scrollTargetLayout()
+                        }
+                        .scrollClipDisabled()
+                        .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
+                        .safeAreaPadding(.trailing, (size.width - 300) / 2)
+                        .scrollIndicators(.hidden)
+                    }
                     
                     VStack(spacing:15){
                         Text("Step 1: Copy your link")

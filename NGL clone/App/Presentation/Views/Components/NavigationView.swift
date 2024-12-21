@@ -88,8 +88,10 @@ struct NavigationView: View {
                     VStack {
                         TabView(selection: $selectedIndex) {
                             PlayView(showShareDialog: $showShareDialog, showCopiedDialog: $showCopiedDialog)
+                                .background(.white)
                                 .tag(0)
                             InboxView()
+                                .background(.white)
                                 .tag(1)
                         }
                         .ignoresSafeArea()
