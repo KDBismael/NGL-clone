@@ -26,7 +26,7 @@ struct MessageView: View {
                 Spacer()
                 VStack{
                     HStack(spacing:10){
-                        Image("Instagram-logo")
+                        Image("instagram")
                             .resizable()
                             .frame(width: 33, height:33)
                             .scaledToFit()
@@ -38,7 +38,7 @@ struct MessageView: View {
                             }
                         
                         
-                        Image("logo snap")
+                        Image("snapchat")
                             .resizable()
                             .frame(width: 33, height:33)
                             .scaledToFit()
@@ -155,7 +155,7 @@ struct MessageView: View {
                 HStack{
                     Spacer()
                     HStack{
-                        Image(isHighlighted == shareOn.instagram ? "Instagram-logo" : "logo snap")
+                        Image(isHighlighted == shareOn.instagram ? "instagram" : "snapchat")
                             .resizable()
                             .frame(width: 25, height:25)
                             .scaledToFit()
