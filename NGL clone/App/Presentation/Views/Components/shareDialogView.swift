@@ -36,7 +36,7 @@ struct shareDialogView: View {
                     Button {
                         isHighlighted = .instagram
                     } label: {
-                        Image("Instagram-logo")
+                        Image("instagram")
                             .resizable()
                             .frame(width: 33, height:33)
                             .scaledToFit()
@@ -50,7 +50,7 @@ struct shareDialogView: View {
                     Button {
                         isHighlighted = .snap
                     } label: {
-                        Image("logo snap")
+                        Image("snapchat")
                             .resizable()
                             .frame(width: 33, height:33)
                             .scaledToFit()
