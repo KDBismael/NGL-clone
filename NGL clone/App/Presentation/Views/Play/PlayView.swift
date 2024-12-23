@@ -21,6 +21,7 @@ struct PlayView: View {
     @State private var isPhotoPickerPresented = false
     @State private var photoPickerItem: PhotosPickerItem?
     @State private var buttonsGradientColor:LinearGradient = LinearGradient(colors:[Color(hex: "#ec197d"),Color(hex: "#fc8118")], startPoint:.leading, endPoint: .trailing)
+//    @State private var isScaled: Bool = false
     
     var body: some View {
         VStack(spacing:30){
@@ -177,7 +178,6 @@ struct PlayView: View {
                 .scrollIndicators(.hidden)
             }
             
-            
             VStack(spacing:15){
                 Text("Step 1: Copy your link")
                     .font(.system(size: 20))
@@ -226,16 +226,25 @@ struct PlayView: View {
                     showShareDialog = true
                 } label: {
                     HStack{
-                        Spacer()
                         Text("Share!")
-                        Spacer()
                     }
+                    .padding(.horizontal, 120)
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                     .padding(.vertical, 10)
                 }
                 .background(buttonsGradientColor)
                 .clipShape(RoundedRectangle(cornerRadius: 45))
+//                .scaleEffect(isScaled ? 1.1 : 1)
+//                .offset(y: isScaled ? 10 : 0)
+//                .animation(
+//                    .easeInOut(duration: 0.7)
+//                    .repeatForever(autoreverses: true), // Continuously animate back and forth
+//                    value: isScaled
+//                )
+//                .onAppear {
+//                    isScaled = true // Trigger the animation on view load
+//                }
                 
                 
                 HStack{
