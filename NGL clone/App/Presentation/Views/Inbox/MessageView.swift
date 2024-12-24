@@ -12,6 +12,7 @@ enum shareOn{
 }
 
 struct MessageView: View {
+    @Binding var message:MessageModel
     var colors1: [String] = ["#ec197d","#fc8118"]
     var colors2: [String] = ["#9b59b6","#52be80"]
     
@@ -90,7 +91,7 @@ struct MessageView: View {
                 
                 HStack{
                     Spacer()
-                    Text("Baltimore and Touareg = Baliverne")
+                    Text(message.message)
                     Spacer()
                 }
                 .padding(.vertical,25)
@@ -180,7 +181,7 @@ struct MessageView: View {
 }
 
 #Preview {
-    MessageView()
+    MessageView(message: .constant(MessageModel(id: 1, message: "Baltimore and Touareg = Baliverne", date: "last month")))
 }
 
 struct HighlightModifier: ViewModifier{

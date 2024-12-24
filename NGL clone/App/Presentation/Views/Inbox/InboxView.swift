@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct InboxView: View {
+    
+    @StateObject var viewModel = MessageViewModel(services: Services())
     @State private var isNotificationOn = false
     @State private var singleSelection: UUID?
+    
     var body: some View {
         
         NavigationStack{
@@ -36,21 +39,23 @@ struct InboxView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding()
                     
-                    ForEach(1 ..< 10) { index in
-                        // we also have this way of doing it
-//                        NavigationLink {
-//                            Text("Screen with index \(index)")
-//                        } label: {
-//                        }
-                        NavigationLink(value: index ) {
-                            ArrowButtonView(title: .constant("Depuis t'es allé au Ghana tu te pppppppppp"), image: .constant("envelope.fill"), date: .constant("last month"),textColor:.constant(.black), imageColor:.constant(.pink), backgroundColor:.constant(.color(.gray.opacity(0.3))))
-                        }
+                    ForEach(viewModel.messages) { message in
                         
+                        NavigationLink(value: message) {
+                            ArrowButtonView(
+                                title: .constant(message.message),
+                                image: .constant("envelope.fill"),
+                                date: .constant(message.date),
+                                textColor:.constant(.black),
+                                imageColor:.constant(.pink),
+                                backgroundColor:.constant(.color(.gray.opacity(0.3)))
+                            )
+                        }
                     }
                 }
             }
-            .navigationDestination(for: Int.self) { index in
-                MessageView()
+            .navigationDestination(for: MessageModel.self) { message in
+                MessageView(message: .constant(message))
                     .toolbarVisibility(.hidden, for: .navigationBar)
             }
         }
