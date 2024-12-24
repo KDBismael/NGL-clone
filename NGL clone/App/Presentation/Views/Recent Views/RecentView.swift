@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecentView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel:RecentViewViewModel = RecentViewViewModel(services: Services())
     
     let linearColor = LinearGradient(colors:[Color(hex: "#0fc0f0"),Color(hex: "#50e9f2")], startPoint:.leading, endPoint: .trailing)
     
@@ -17,9 +18,9 @@ struct RecentView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(1..<10) { index in
+                ForEach(viewModel.recentViews) { recentView in
                     
-                    ArrowButtonView(title: .constant("New view!"), image: .constant("eyes.inverse"), date: .constant("last month"),textColor:.constant(Color(hex: "#0fc0f0")), imageColor:.constant(.white), backgroundColor:.constant(.gradient(linearColor)))
+                    ArrowButtonView(title: .constant("New view!"), image: .constant("eyes.inverse"), date: .constant(recentView.date),textColor:.constant(Color(hex: "#0fc0f0")), imageColor:.constant(.white), backgroundColor:.constant(.gradient(linearColor)))
                         .onTapGesture {
                             showBottomSheet = true
                         }
